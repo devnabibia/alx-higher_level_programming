@@ -1,13 +1,20 @@
 #!/usr/bin/node
 
-const { dict } = require('./101-data');
+/**
+ * script that imports a dictionary of occurrences by user id and
+ * computes a dictionary of user ids by occurrence.
+ * Your script must import dict from the file 101-data.js.
+ * In the new dictionary: A key is a number of occurrences, a value is
+ * the list of user ids.
+ * Print the new dictionary at the end
+ */
+const initDict = require('./101-data').dict;
+const newDict = {};
 
-const convertedArr = Object.entries(dict);
-
-const newObj = {};
-
-convertedArr.forEach(element => {
-  newObj[element[1]] ? newObj[element[1]].push(element[0]) : newObj[element[1]] = [element[0]];
-});
-
-console.log(newObj);
+for (const key in initDict) {
+  if (newDict[initDict[key]] === undefined) {
+    newDict[initDict[key]] = [];
+  }
+  newDict[initDict[key]].push(key);
+}
+console.log(newDict);
